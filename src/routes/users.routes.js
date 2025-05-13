@@ -19,7 +19,7 @@ router.route("/logout").post(userLogOut);
 router.route("/update-password").post(authenticateUser, updatePassword);
 router
   .route("/delete-user")
-  .post(authenticateUser, userAuthorization, deleteUser);
+  .delete(authenticateUser, userAuthorization, deleteUser);
 
 export default router;
 // This code imports the `createUser` function from the `users.controllers.js` file and creates an Express router. It defines a POST route at `/create-user` that calls the `createUser` function when a request is made to that endpoint. Finally, it exports the router for use in other parts of the application.
