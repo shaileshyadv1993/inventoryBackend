@@ -54,7 +54,7 @@ const getuser = AsyncHandler(async (req, res) => {
   if (!allUsers) {
     return new ApiError(404, "Users list is empty");
   }
-  res.status(200).json(allUsers);
+  res.status(200).json({ allUsers: allUsers });
 });
 
 // User login
@@ -65,14 +65,13 @@ const userLogin = AsyncHandler(async (req, res) => {
   }
   const user = await User.findOne({ email });
   if (!user) {
-    res.status(404).json("User not found");
-    throw new ApiError(404, "This email is not registered");
+    return new ApiError(404, "This email is not registered");
   }
 
   const isPasswordValid = await user.isPasswordCorrect(password);
 
   if (!isPasswordValid) {
-    throw new ApiError(401, "Incorrect password");
+    return new ApiError(401, "Incorrect password");
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
@@ -83,11 +82,11 @@ const userLogin = AsyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   if (!userLogedIn) {
-    throw new ApiError(404, "User is not logged in");
+    return new ApiError(404, "User is not logged in");
   }
   const accessTokenOption = {
     httpOnly: true,
-    securre: true || process.env.NODE_ENV === "production",
+    secure: true || process.env.NODE_ENV === "production",
     // maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES_IN), //The cookie will become a session cookie (deleted when the browser closes).
 
     // Even if the JWT is valid for 7 days, it’s gone if the browser closes.
@@ -114,8 +113,11 @@ const userLogin = AsyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, accessTokenOption)
     .cookie("refreshToken", refreshToken, refreshTokenOption)
     .json({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
+      data: {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userData: userLogedIn,
+      },
       message: "User logged in successfully",
     });
 });
