@@ -24,12 +24,14 @@ app.use(cookieParser());
 // For production
 const allowedOrigins = ["https://myapp.com", "http://localhost:3000"]; // add both local & prod
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    Credential: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     Credential: true,
+//   })
+// );
+
+app.use(cors());
 
 // Routes
 app.use("/api/v1/users", userRouter); // Users route
