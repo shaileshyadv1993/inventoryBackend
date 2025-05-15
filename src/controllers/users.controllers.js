@@ -95,7 +95,7 @@ const userLogin = AsyncHandler(async (req, res) => {
   };
   const refreshTokenOption = {
     httpOnly: true,
-    securre: true || process.env.NODE_ENV === "production",
+    secure: true || process.env.NODE_ENV === "production",
     // maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES_IN),
   };
 
