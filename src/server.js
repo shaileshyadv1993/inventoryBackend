@@ -32,7 +32,7 @@ const allowedOrigins = ["http://127.0.0.1:5500", "http://localhost:4000"]; // ad
 // );
 app.use(
   cors({
-    origin: allowedOrigins, // replace with your frontend origin
+    // origin: allowedOrigins, // replace with your frontend origin
     credentials: true,
   })
 );
