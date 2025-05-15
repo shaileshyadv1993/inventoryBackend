@@ -89,6 +89,7 @@ const userLogin = AsyncHandler(async (req, res) => {
   const accessTokenOption = {
     httpOnly: true,
     secure: true || process.env.NODE_ENV === "production",
+    sameSite: "None",
     // maxAge: ms(process.env.ACCESS_TOKEN_EXPIRES_IN), //The cookie will become a session cookie (deleted when the browser closes).
 
     // Even if the JWT is valid for 7 days, it’s gone if the browser closes.
@@ -97,6 +98,7 @@ const userLogin = AsyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true || process.env.NODE_ENV === "production",
     // maxAge: ms(process.env.REFRESH_TOKEN_EXPIRES_IN),
+    sameSite: "None",
   };
 
   try {
