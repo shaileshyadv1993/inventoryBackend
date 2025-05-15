@@ -128,7 +128,7 @@ const userLogin = AsyncHandler(async (req, res) => {
 
 // Logout
 const userLogOut = AsyncHandler(async (req, res) => {
-  const cookies = req.cookies;
+  const cookies = req.cookies || req.headers.authorization?.split(" ")[1];
   if (!cookies?.refreshToken) {
     throw new ApiError(202, "No token");
   }
