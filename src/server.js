@@ -22,7 +22,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // For production
-const allowedOrigins = ["https://myapp.com", "http://localhost:3000"]; // add both local & prod
+const allowedOrigins = ["http://127.0.0.1:5500", "http://localhost:4000"]; // add both local & prod
 
 // app.use(
 //   cors({
@@ -30,8 +30,12 @@ const allowedOrigins = ["https://myapp.com", "http://localhost:3000"]; // add bo
 //     Credential: true,
 //   })
 // );
-
-app.use(cors({ Credential: true }));
+app.use(
+  cors({
+    origin: allowedOrigins, // replace with your frontend origin
+    credentials: true,
+  })
+);
 
 // Routes
 app.use("/api/v1/users", userRouter); // Users route
