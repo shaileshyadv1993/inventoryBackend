@@ -48,13 +48,15 @@ const createUser = AsyncHandler(async (req, res) => {
   });
 });
 
-// Get user details
+// Get all users
 const getuser = AsyncHandler(async (req, res) => {
   const allUsers = await User.find().select("-password -refreshToken");
   if (!allUsers) {
     return new ApiError(404, "Users list is empty");
   }
-  res.status(200).json({ allUsers: allUsers });
+  res
+    .status(200)
+    .json({ allUsers: allUsers, message: "Here you have all users" });
 });
 
 // User login

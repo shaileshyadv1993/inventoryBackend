@@ -31,7 +31,7 @@ const allowedOrigins = ["https://myapp.com", "http://localhost:3000"]; // add bo
 //   })
 // );
 
-app.use(cors());
+app.use(cors({ Credential: true }));
 
 // Routes
 app.use("/api/v1/users", userRouter); // Users route
