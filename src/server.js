@@ -24,12 +24,6 @@ app.use(cookieParser());
 // For production
 const allowedOrigins = ["http://127.0.0.1:5500", "http://localhost:4000"]; // add both local & prod
 
-// app.use(
-//   cors({
-//     origin: allowedOrigins,
-//     Credential: true,
-//   })
-// );
 app.use(
   cors({
     origin: allowedOrigins, // replace with your frontend origin
